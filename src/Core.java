@@ -34,7 +34,7 @@ public class Core extends Data
         Pattern bl = Pattern.compile ("^:[^\\s]+ PRIVMSG [^\\s]+ :(.+)?(" + combine (list.toArray (new String[list.size()]), "|") + ")", Pattern.CASE_INSENSITIVE);
         Matcher cm = bl.matcher(cmds);
         Pattern ping = Pattern.compile("^PING :(.+)", Pattern.CASE_INSENSITIVE);
-        Matcher check_ping = ping.matcher(parser);
+        Matcher check_ping = ping.matcher(cmds);
         Pattern blist = Pattern.compile(":#list", Pattern.CASE_INSENSITIVE);
         Matcher check_bl = blist.matcher(cmds);
         Pattern who = Pattern.compile("#who", Pattern.CASE_INSENSITIVE);
@@ -87,16 +87,16 @@ public class Core extends Data
         if (check_help.find())
             msg_chan(
                     "Ok, I'll help you ^-^" +
-                    " So... " +
-                    "#blacklist <word> => Add a word to the blacklist, " +
-                    "#reset => Reset all the non-default blacklisted word, " +
-                    "#exit => Seems obvious to me... " +
-                    "#list => Show the list of all the blacklisted words, " +
-                    "#kick <user> <reason> => Kick someone from the chan, " +
-                    "#kill <user> <reason> => Kill someone from the server, " +
-                    "#izadouchebag <user> => Let's see if this user's a douchebag... " +
-                    "#who => Give some information about the bot " +
-                    "Spero di esserti stato d'aiuto C:"
+                            " So... " +
+                            "#blacklist <word> => Add a word to the blacklist, " +
+                            "#reset => Reset all the non-default blacklisted word, " +
+                            "#exit => Seems obvious to me... " +
+                            "#list => Show the list of all the blacklisted words, " +
+                            "#kick <user> <reason> => Kick someone from the chan, " +
+                            "#kill <user> <reason> => Kill someone from the server, " +
+                            "#izadouchebag <user> => Let's see if this user's a douchebag... " +
+                            "#who => Give some information about the bot " +
+                            "That's all, folks C:"
             );
 
         else if(check_ins.find())
@@ -104,7 +104,7 @@ public class Core extends Data
             Pattern idiot = Pattern.compile("^:([^\\s]+)!~?([^\\s]+)@([^\\s]+)");
             Matcher check_idiot = idiot.matcher(cmds);
 
-             if (check_idiot.find()) {
+            if (check_idiot.find()) {
                 String idiot_found = check_ins.group(1);
                 Random dat_ass = new Random();
                 int dem_titties = dat_ass.nextInt(douchebag.length);
@@ -115,8 +115,8 @@ public class Core extends Data
         else if (check_who.find())
             msg_chan(
                     "My name is " + bot +
-                    " => Version: " + version +
-                    " => Masters: " + Arrays.toString(masters)
+                            " => Version: " + version +
+                            " => Masters: " + Arrays.toString(masters)
             );
 
         else if (cm.find())
@@ -128,7 +128,7 @@ public class Core extends Data
                 Pattern no_kick= Pattern.compile("^:"+combine (masters, "|"), Pattern.CASE_INSENSITIVE);
                 Matcher check_no_kick = no_kick.matcher(cmds);
                 if(!check_no_kick.find())
-                        kick_blacklist(asd);
+                    kick_blacklist(asd);
             }
         }
 
@@ -144,10 +144,10 @@ public class Core extends Data
             Matcher check_varg = varg.matcher(cmds);
             if (check_varg.find()) {
                 String user = check_varg.group(1);
-                msg_chan(user + " Hai un messaggio privato contenente la lista C:");
+                msg_chan(user + " You have a new PM C:");
 
                 while (kk.hasNext()) {
-                        msg_user(user, kk.next());
+                    msg_user(user, kk.next());
                 }
                 kk.close();
             }
@@ -220,14 +220,14 @@ public class Core extends Data
 
     private static void kick(String user, String why) throws IOException
     {
-       lmao.write("KICK #" + chan + " " + user + " :" + why + "\n");
-       lmao.flush();
+        lmao.write("KICK #" + chan + " " + user + " :" + why + "\n");
+        lmao.flush();
     }
 
     private static void kill(String user, String why) throws IOException
     {
-       lmao.write("KILL " + user + " :" + why + "\n");
-       lmao.flush();
+        lmao.write("KILL " + user + " :" + why + "\n");
+        lmao.flush();
     }
 
     private static void learn(String wut) throws IOException
@@ -261,7 +261,7 @@ public class Core extends Data
             nyan_cat.flush();
             list.add(aDefault_blacklist);
         }
-        msg_chan("Tutto resettato ^-^");
+        msg_chan("Done ^-^");
     }
 
     private static void exit_irc() throws IOException
